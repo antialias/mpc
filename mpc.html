@@ -248,7 +248,7 @@ input {
 	
 <div class="current_balance">
     <span class="current_balance_label">current balance</span>
-    <span class="current_balance_value"><span id="current_balance_value_dollar">$</span><input class="current_balance_value" id="existing_balance" type="number" value="0.00"></span>
+    <span class="current_balance_value"><span id="current_balance_value_dollar">¢</span><input class="current_balance_value" id="existing_balance" type="text" pattern="[0-9]*" value="0"></span>
 </div>
 <div class="to_get">to get:</div>
 <div class="num_rides_value" id="rides_to_purchase">1</div>
@@ -364,8 +364,7 @@ input {
     }
 	var eb = document.getElementById('existing_balance');
 	eb.onfocus = function(e) {
-	    eb.focus();
-	    eb.select();
+	    setTimeout(function () {eb.setSelectionRange(0,eb.value.length);},0);
 	};
 	var rp = document.getElementById('rides_to_purchase');
 	var ac = document.getElementById('add_to_card');
@@ -397,7 +396,7 @@ input {
         // eb.innerHTML = parseFloat(eb.innerHTML).toFixed(2);
         // eb.innerHTML = parseFloat(eb.innerHTML).toFixed(2);
 	    var params = {
-    	        existing_balance:parseFloat(eb.value?parseFloat(eb.value):0),
+    	        existing_balance:parseFloat(eb.value?parseFloat(eb.value):0) / 100,
     	        rides_to_purchase:parseFloat(rp.innerHTML?parseFloat(rp.innerHTML):""),
     	        bonus_threshold:10,
     	        ride_price:2.25
