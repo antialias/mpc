@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://thomashallock.com/mpc/ -->
+<html manifest="index.appcache"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width = device-width, initial-scale=0.5, user-scalable = no">
+</head>
+<body class=" hasGoogleVoiceExt">
+<style>
+body {
+	margin:0;
+	padding:0;
+	font-family:sans-serif;
+	font-family:arial;
+	font-weight:bold;
+}
+div {
+	padding:0px;
+	margin:0px;
+}
+div {
+	padding:5px;
+}
+.current_balance {
+	position:absolute;
+	border-bottom-right-radius:15px;
+	background-color:black;
+	color:white;
+	width:265px;
+	height:50px;
+	font-size:22px;
+	line-height:22px;
+}
+.current_balance_value {
+	font-size:36px;
+	top:17px;
+	right:5px;
+	position:absolute;
+}
+.current_balance_label {
+	left:10px;
+	width:10px;
+	position:absolute;
+}
+.to_get {
+	position:absolute;
+	color:#888;
+	top:55px;
+	left:20px;
+	font-size:20px;
+}
+.num_rides_value {
+	font-size:360px;
+	position:absolute;
+	top:5px;
+}
+.rides_adjuster {
+	color:#888;
+	position:absolute;
+	top:340px;
+	font-size:58pt;
+    height:93px;
+}
+* {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+input {
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -o-user-select: text;
+    user-select: text;
+}
+.rides_adjuster_less,
+.rides_adjuster_more {
+	border-radius:68px;
+	background-color:black;
+	display:inline-block;
+	color:white;
+	text-align:center;
+	width:43pt;
+	height:43pt;
+    font-size:64pt;
+	line-height:54px;
+}
+.rides_adjuster_less {
+	margin-right:-18px;
+}
+.rides_adjuster_more {
+	margin-left:-18px;
+}
+.fare_type {
+    background-color:#888;
+    color:white;
+    font-size:17px;
+    line-height:10px;
+    bottom:0;
+    padding:0;
+    margin:0;
+    
+    text-align:center;
+    position:absolute;
+    display:inline;
+    padding:5px;
+    width:165px;
+    left:88px;
+    border-radius:8px;
+    bottom:3px;
+}
+.fare_type_value:before {
+    content:"$";
+}
+.add_to_card,.post_purchase_summary {
+    border-top:13px solid black;
+    position:absolute;
+    left:0;
+    right:0;
+}
+.add_to_card {
+    top:443px;
+}
+.add_to_card_label_before,
+.add_to_card_label_after,
+.tip {
+    color:#888;
+    font-size:23px;
+    position:absolute;
+}
+.add_to_card_label_after,
+.tip {
+    top:183px;
+}
+.tip {
+    color:#bbb;
+    left:170px;
+}
+.add_to_card_label_before {
+    top:0;
+}
+.add_to_card_amount {
+    font-size:170px;
+    position:absolute;
+    top:6px;
+}
+.add_to_card_amount:before{
+    content:"$";
+}
+.post_purchase_summary {
+    top:678px;
+    color:#888;
+    font-size:20px;
+}
+.final_balance_value:before, .bonus_amount_value:before, .final_balance_rides_remainder_value:before{
+    content:"$";
+}
+.final_balance_value, .final_balance_or{
+    position:absolute;
+    font-size:72px;
+}
+.final_balance_or {
+    left:290px;
+}
+.final_balance_rides_value , .final_balance_rides_rides_text{
+    font-size:36px;
+    position:absolute;
+    top:30px;
+}
+.final_balance_rides_value {
+    left:400px;
+}
+.final_balance_rides_rides_text {
+    left:450px;
+}
+.final_balance_rides_with_text{
+    position:absolute;
+    left:450px;
+    top:65px;
+}
+.final_balance_rides_remainder_value, .final_balance_rides_left_over_text {
+    position:absolute;
+}
+.final_balance_rides_remainder_value {
+    top:90px;
+    left:443px;
+}
+.final_balance_rides_left_over_text{
+    top:113px;
+    left:428px;
+}
+.purchase_suggestions {
+    position:absolute;
+    right:0;
+    text-align:center;
+}
+.purchase_suggestions .purchase_suggestion {
+    color:white;
+    background-color:black;
+    margin:15px;
+    border-radius:30px;
+    width:165px;
+    font-size:16pt;
+    line-height:15px;
+    padding:15px;
+}
+.purchase_suggestions .suggestion_rides {
+    font-size:30pt;
+    margin-top:15px;
+}
+/*.purchase_suggestions .full_bonus_with_remainder .suggestion_remainder {
+    font-size:10pt;
+}*/
+
+#rides_adjuster_less,
+#rides_adjuster_more {
+    display:inline-block;
+    width:57px;
+    height:57px;
+    line-height:0;
+    cursor:pointer;
+}
+.bonus_text {
+    display:none;
+}
+.current_balance_value,
+#existing_balance {
+    position:absolute;
+    display:block;
+    z-index:1;
+    color:inherit;
+    background-color:transparent;
+    margin-right:5px;
+    margin-bottom:5px;
+    right:0;
+    top:0;
+    bottom:0;
+    width:130px;
+    text-align:right;
+    border:none;
+}
+#current_balance_value_dollar {
+    position:absolute;
+    top:15px;
+    right:145px;
+}
+</style>
+	
+<div class="current_balance">
+    <span class="current_balance_label">current balance</span>
+    <span class="current_balance_value"><span id="current_balance_value_dollar">$</span><input class="current_balance_value" id="existing_balance" type="number" value="0.00"></span>
+</div>
+<div class="to_get">to get:</div>
+<div class="num_rides_value" id="rides_to_purchase">1</div>
+<div class="rides_adjuster">
+	<span id="rides_adjuster_less">
+	    <span class="rides_adjuster_less">-</span>
+	</span>
+	rides
+	<span id="rides_adjuster_more">
+    	<span class="rides_adjuster_more">+</span>
+    </span>
+	<div class="fare_type">
+		<span class="fare_type_value">2.25</span>
+		<span class="fare_type_label">regular fare</span>
+	</div>
+</div>
+
+<div class="add_to_card">
+    <div class="add_to_card_label_before">...add</div>
+    <div class="add_to_card_amount" id="add_to_card">2.25</div>
+    <div class="add_to_card_label_after">to your card.</div>
+    <div class="tip" id="tip"> (but you get no bonus)</div>
+</div>
+<div class="post_purchase_summary">
+    After your
+    <span class="bonus_text" id="bonus_text" style="display: none;"><span class="bonus_amount_percent" id="bonus_amount_percent">7%</span> bonus of <span class="bonus_amount_value" id="bonus_amount_value">0.74</span></span><span class="nobonus_text" id="nobonus_text" style="display: inline;">purchase</span>, your balance will be:
+    <div class="final_balance_value" id="new_balance">2.25</div>
+    <div class="final_balance_or">or</div>
+    <div class="final_balance_rides">
+    	<span class="final_balance_rides_value" id="new_rides_total">1</span>
+    	<span class="final_balance_rides_rides_text">rides</span>
+    	<span class="final_balance_rides_with_text">with</span>
+    	<span class="final_balance_rides_remainder_value" id="remainder">0.00</span>
+    	<span class="final_balance_rides_left_over_text">left over</span>
+    </div>
+</div>
+<div class="purchase_suggestions">
+    minimum purchase for:
+    <div class="purchase_suggestion full_bonus_with_remainder" id="recommended_num_rides_button">
+        <div class="suggestion_description">full bonus</div>
+        <div class="suggestion_remainder" id="suggestion_remainder">(4¢ remainder)</div>
+        <div class="suggestion_rides" id="recommended_num_rides">5 rides</div>
+    </div>
+    <div class="purchase_suggestion full_bonus_no_remainder" id="noremainder_bonus_button">
+        <div class="suggestion_description">full bonus</div>
+        <div class="suggestion_remainder">no remainder</div>
+        <div class="suggestion_rides" id="noremainder_bonus">17 rides</div>
+    </div>
+    <div class="purchase_suggestion minimum_with_no_remainder" id="noremainder_button">
+        <div class="suggestion_description">no remainder</div>
+        <div class="suggestion_rides" id="noremainder">1 ride</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+(function () {
+    var first_time = true;
+	var money_to_add = function(params) {
+	    var defaults = {
+	        bonus_threshold:10,
+	        bonus_rate:0.07,
+	        ride_price:2.25,
+	        existing_balance:0,
+	        rides_to_purchase:1,
+	        purchase_increment:0.05,
+	    };
+	    for (i in params) {
+	        defaults[i] = params[i];
+	    }
+	    var got_bonus = true,
+		r_onemore = 0,
+		for_one_more_ride = 0;
+    	with (defaults) {
+    	    bonus_threshold / ride_price
+	        var r_bonus =         (ride_price * (rides_to_purchase +     Math.floor(existing_balance / ride_price)) - existing_balance) / (1 + bonus_rate );
+	        var r_nobonus =         (ride_price * (rides_to_purchase +     Math.floor(existing_balance / ride_price)) - existing_balance);
+            if (r_bonus <= bonus_threshold) { // if the suggested pay amount is under the bonus theshold
+        		if (r_nobonus >= bonus_threshold) { // if the suggested pay amount without the bonus is over the bonus threshold
+        			// since the amount we need to pay, with bonus, to get rides_to_purchase rides is under the bonused amount,
+        			// we will not get the bonus
+        			// so in order to get rides_to_purchase rides, we have to pay the unbonused amount, which is over the bonus threshold.
+        			// so to get out of bonus limbo, and collect an extra bonus_threshold * bonus_rate,
+        			// the minimum we can pay to get rides_to_purchase rides is the exact amount of the bonus_threshold.
+                    r = bonus_threshold;
+                    
+                    // but in doing so we collect a bonus of bonus_threshold * bonus_rate!!
+                    // This bonus gets us much closer to another ride, so let's figure out how much
+                    // it will cost to go all the way to rides_to_purchase + 1
+
+        			got_bonus = "buy_more";
+        		} else {
+        			got_bonus = false;
+        			r = r_nobonus;
+                    
+        			bonus_rate = 0;
+        		}
+            } else {
+                r = r_bonus;
+            }
+            r = parseFloat(r.toFixed(2)); // kill the floating-point cruft
+            r += parseFloat((purchase_increment - r % purchase_increment).toFixed(2)) % purchase_increment; // round it up to the nearest purchase increment
+            r = parseFloat(r.toFixed(2)); // kill the floating-point cruft
+    	    return {
+    	        add_to_card:r,
+    	        got_bonus:got_bonus,
+    	        total_rides:((existing_balance + r * (1+bonus_rate)) / ride_price).toFixed(),
+    	        new_balance:(existing_balance + r * (1+bonus_rate)).toFixed(2),
+    	        remainder:(parseFloat((existing_balance + r * (1+bonus_rate)).toFixed(2)) % ride_price).toFixed(2),
+    	        bonus_amount: got_bonus * bonus_rate * r,
+    	        bonus_rate: bonus_rate,
+    	    };
+        }
+    }
+	var eb = document.getElementById('existing_balance');
+	eb.onfocus = function(e) {
+	    eb.focus();
+	    eb.select();
+	};
+	var rp = document.getElementById('rides_to_purchase');
+	var ac = document.getElementById('add_to_card');
+	var tip = document.getElementById('tip');
+	var nb = document.getElementById('new_balance');
+	var rt = document.getElementById('new_rides_total');
+	var ws = document.getElementById('remainder');
+	var recommended_remainder = document.getElementById('suggestion_remainder');
+    // var wo = document.getElementById('add_to_card_one_more');
+    // var fo = document.getElementById('for_one_more_ride');
+	var noremainder = document.getElementById('noremainder');
+	var noremainder_button = document.getElementById('noremainder_button');
+	var noremainder_bonus = document.getElementById('noremainder_bonus');
+	var noremainder_bonus_button = document.getElementById('noremainder_bonus_button');
+	var recommended = document.getElementById('recommended_num_rides');
+	var recommended_button = document.getElementById('recommended_num_rides_button');
+	var nobonus_text = document.getElementById('nobonus_text');
+    var bonus_text = document.getElementById('bonus_text');
+    var bonus_amount_percent = document.getElementById('bonus_amount_percent');
+    var bonus_amount_value = document.getElementById('bonus_amount_value');
+    
+	rp.onkeypress = function(e) {
+		var charCode = (typeof e.which == "number") ? e.which : e.keyCode;
+		if (charCode < 48 || charCode > 57) {
+			return false;
+		}
+	};
+	var recalculate = rp.onkeyup = eb.onkeyup = eb.onmouseup = function(e) {
+        // eb.innerHTML = parseFloat(eb.innerHTML).toFixed(2);
+        // eb.innerHTML = parseFloat(eb.innerHTML).toFixed(2);
+	    var params = {
+    	        existing_balance:parseFloat(eb.value?parseFloat(eb.value):0),
+    	        rides_to_purchase:parseFloat(rp.innerHTML?parseFloat(rp.innerHTML):""),
+    	        bonus_threshold:10,
+    	        ride_price:2.25
+    	    },
+    	    ma = money_to_add(params);
+	    ++params.rides_to_purchase;
+	    ma_onemore = money_to_add(params);
+	    params.rides_to_purchase = Math.floor(params.bonus_threshold / params.ride_price) + 1;
+	    rec1_rp = params.rides_to_purchase;
+	    rec1 = money_to_add(params);
+	    ++params.rides_to_purchase;
+	    rec2_rp = params.rides_to_purchase;
+	    rec2 = money_to_add(params);
+	    ac.innerHTML = ma.add_to_card.toFixed(2);
+	    if (ma.got_bonus) {
+	        bonus_amount_percent.innerHTML = (ma.bonus_rate * 100).toFixed(0) + "%";
+	        bonus_amount_value.innerHTML = (ma.bonus_amount).toFixed(2);
+	        nobonus_text.style.display='none';
+	        bonus_text.style.display='inline';
+        } else {
+	        nobonus_text.style.display='inline';
+	        bonus_text.style.display='none';
+        }
+	    tip.innerHTML = (ma.got_bonus ? (ma.got_bonus == "buy_more" ? " (buy more; bonus limbo!)" : "") : " (but you get no bonus)");
+	    nb.innerHTML = ma.new_balance;
+	    rt.innerHTML = ma.total_rides;
+	    ws.innerHTML = ma.remainder;
+        // wo.innerHTML = ma_onemore.add_to_card;
+        // fo.innerHTML = (ma_onemore.add_to_card - ma.add_to_card).toFixed(2);
+	    rec_rp = (rec1.got_bonus && rec1.got_bonus != "buy_more") ? rec1_rp : rec2_rp;
+	    rec_rp_remainder = (rec1.got_bonus && rec1.got_bonus != "buy_more") ? rec1.remainder : rec2.remainder;
+        recommended.innerHTML = rec_rp + " ride" + (1 == rec_rp?"":"s");
+        recommended_remainder.innerHTML = rec_rp_remainder > 0 ? "(" + (rec_rp_remainder * 100).toFixed(0) + "&cent remainder)" : "";
+        recommended_button.onclick = function(e) {
+            rp.innerHTML = rec_rp;
+            recalculate();
+        }
+        params.rides_to_purchase = 1;
+        nr = money_to_add(params);
+        maxloops = 1000;
+        while (nr.remainder != 0) {
+            --maxloops;
+            if (maxloops <= 0) {
+                return;
+            }
+            ++params.rides_to_purchase;
+            nr = money_to_add(params);
+        }
+        noremainder.innerHTML = params.rides_to_purchase + " ride" + (1 == params.rides_to_purchase?"":"s");
+        window.scrollTo(0,0);
+        if (first_time) {
+            rp.innerHTML = params.rides_to_purchase;
+            first_time = false;
+            recalculate();
+        }
+        var rp_nb = params.rides_to_purchase;
+        noremainder_button.onclick = function(e) {
+            rp.innerHTML = rp_nb;
+            recalculate();
+        };
+        if (params.rides_to_purchase == rec_rp) {
+            //noremainder_button.style.display = "none";
+        } else {
+            //noremainder_button.style.display = "block";
+        }
+
+        params.rides_to_purchase = rec_rp;
+        nr = money_to_add(params);
+        maxloops = 1000;
+        while (nr.remainder != 0) {
+            --maxloops;
+            if (maxloops <= 0) {
+                return;
+            }
+            ++params.rides_to_purchase;
+            nr = money_to_add(params);
+        }
+        noremainder_bonus.innerHTML = params.rides_to_purchase + " ride" + (1 == params.rides_to_purchase?"":"s");
+        noremainder_bonus_button.onclick = function(e) {
+            rp.innerHTML = params.rides_to_purchase;
+            recalculate();
+        };
+        if (params.rides_to_purchase == rec_rp) {
+            //noremainder_bonus_button.style.display = "block";
+        } else {
+            //noremainder_bonus_button.style.display = "none";
+        }
+	}
+	document.getElementById('rides_adjuster_more').onclick= function(e) {
+        rp.innerHTML = (v = parseInt(rp.innerHTML) + 1) >=1 ? v : 1;
+        recalculate();
+    }
+	document.getElementById('rides_adjuster_less').onclick= function(e) {
+        rp.innerHTML = (v = parseInt(rp.innerHTML) - 1) >=1 ? v : 1;
+        recalculate();
+    }
+    recalculate();
+    
+    
+})();
+
+</script>
+
+
+
+
+</body></html>
